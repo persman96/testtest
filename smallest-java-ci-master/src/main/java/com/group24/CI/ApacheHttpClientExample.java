@@ -1,6 +1,7 @@
 package com.group24.CI;
 
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -20,7 +21,7 @@ public class ApacheHttpClientExample {
 
     public static void main(String[] args) throws Exception {
         //String payload = """data={"owner": "persman96", "repo": "testtest", "sha": "12e2fb7d5232f69535677bbb3487c0ed6078b36a", "state": "failure"}""";
-        String payload = "{\"value\": {\"owner\": \"persman96\",\"repo\": \"testtest\",\"sha\": \"12e2fb7d5232f69535677bbb3487c0ed6078b36a\",\"state\": \"failure\"}}";
+        String payload = "{\"value\": {\"owner\": \"persman96\",\"repo\": \"testtest\",\"sha\": \"12e2fb7d5232f69535677bbb3487c0ed6078b36a\",\"state\": \"success\"}}";
         /*"""
                 data={
                     "username": "admin",
@@ -33,6 +34,13 @@ public class ApacheHttpClientExample {
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api.github.com/repos/persman96/testtest/statuses/12e2fb7d5232f69535677bbb3487c0ed6078b36a");
+
+        request.setHeader(HttpHeaders.CONTENT_TYPE,"application/json");
+
+        String finalToken = "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";
+
+        request.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + finalToken);
+
         request.setEntity(entity);
 
         HttpResponse response = httpClient.execute(request);
