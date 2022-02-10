@@ -6,6 +6,11 @@ import javax.servlet.ServletException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
 import org.eclipse.jetty.server.Server;
@@ -82,8 +87,20 @@ public class ContinuousIntegrationServer extends AbstractHandler
         // 2nd compile the code
 
         response.getWriter().println("CI job done");
+
+        JSONObject test = new JSONObject();
+        test.put("owner", "persman96");
+        test.put("repo", "testtest");
+        test.put("sha", "12e2fb7d5232f69535677bbb3487c0ed6078b36a");
+        test.put("state", "failure");
+
+
+
+
     }
- 
+
+
+
     // used to start the CI server in command line
     public static void main(String[] args) throws Exception
     {
